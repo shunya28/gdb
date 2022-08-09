@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  gdb-db:
+    image: neo4j:4.4.8-community
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - .\gdb_db_volume:/data/neo4j
+    restart: always
+    env_file:
+      - env\neo4j.env
+
+  gdb-app:
+    depends_on:
+      - gdb-db
+    image: python:3.9
+    ports:
+      - 8080:8080
+    build: .\python
+    volumes:
+      - .\gdb_app_volume:/data/gdb
+    restart: always
+    tty: true
+    env_file:
+      - env\django.env
+    working_dir: /data/gdb/django_project
+
+volumes:
+  gdb_db_volume:
+  gdb_app_volume:
