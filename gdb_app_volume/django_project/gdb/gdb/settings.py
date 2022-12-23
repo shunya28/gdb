@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'track',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -124,4 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Settings of neomodel
-config.DATABASE_URL = env('NEO4J_BOLT_URL')
+config.DATABASE_URL = env('BOLT_URL')
